@@ -1,0 +1,26 @@
+VBox {
+    -fx-background-color: darkorange;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+}
+
+Label {
+    -fx-font-family: Arial, Helvetica, sans-serif;
+    -fx-font-size: 45px;
+    -fx-text-fill: white;
+}
+
+Button {
+    -fx-background-color: darkorange;
+    -fx-font-family: Arial, Helvetica, sans-serif;
+    -fx-font-size: 25px;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-wrap-text: true;
+}
+
+Button:hover {
+    -fx-border-color: #222;
+    -fx-text-fill: #222;
+}
