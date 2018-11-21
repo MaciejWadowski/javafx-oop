@@ -1,13 +1,18 @@
 package gui.controllers;
 
 import gui.dialogs.DialogUtils;
+import gui.dialogs.FxmlUtils;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import lab1.data.frame.DataFrame;
 import lab3.*;
 
@@ -26,8 +31,6 @@ public class FileOpenController {
     @FXML
     private TextArea textArea;
 
-    private ListProperty<Class<? extends Value>> listProperty;
-    private ObservableList<Class<? extends Value>> classList;
     private ArrayList<Class<? extends Value>> dataFrameClasses;
     private MainController mainController;
     private File file;
@@ -42,8 +45,8 @@ public class FileOpenController {
         arrayList.add(DateTimeValue.class);
         arrayList.add(FloatValue.class);
 
-        listProperty = new SimpleListProperty<>();
-        classList = FXCollections.observableArrayList(arrayList);
+        ListProperty<Class<? extends Value>> listProperty = new SimpleListProperty<>();
+        ObservableList<Class<? extends Value>> classList = FXCollections.observableArrayList(arrayList);
         listProperty.set(classList);
 
         comboBox.itemsProperty().bindBidirectional(listProperty);
@@ -62,16 +65,22 @@ public class FileOpenController {
         for (int i = 0; i < dataFrameClasses.size(); i++) {
             classes[i] = dataFrameClasses.get(i);
         }
-        System.out.println(Arrays.toString(classes));
+
         if(file != null) {
-            Thread thread = new Thread(() -> {
-                try {
-                    DataFrame dataFrame = new DataFrame(file.getAbsolutePath(), classes);
-                } catch (Exception e) {
-                    DialogUtils.errorDialog(e.toString());
-                }
-            });
-            thread.start();
+            try {
+                DataFrame dataFrame = new DataFrame(file.getAbsolutePath(), classes);
+                FXMLLoader loader = new FXMLLoader(FileOpenController.class.getResource("/fxml/ApplicationController.fxml"));
+                loader.setController(new ApplicationController(dataFrame));
+                loader.setResources(FxmlUtils.getResourceBundle());
+                Stage stage = (Stage) mainController.getBorderPane().getScene().getWindow();
+                stage.setResizable(true);
+                stage.setScene(new Scene(loader.load()));
+
+            } catch (Exception e) {
+                DialogUtils.errorDialog(e.toString());
+            }
+        } else {
+            //code for empty DataFrame
         }
     }
 

@@ -1,11 +1,17 @@
 package gui;
 
+import gui.controllers.ApplicationController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import gui.dialogs.FxmlUtils;
+import lab1.data.frame.DataFrame;
+import lab3.DoubleValue;
+import lab3.IntegerValue;
+
+import java.io.IOException;
 import java.util.Locale;
 
 public class Main extends Application {

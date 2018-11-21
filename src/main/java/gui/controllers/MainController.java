@@ -58,4 +58,8 @@ public class MainController {
     public void setMenu() {
         borderPane.setCenter(vBox);
     }
+
+    public BorderPane getBorderPane() {
+        return this.borderPane;
+    }
 }
