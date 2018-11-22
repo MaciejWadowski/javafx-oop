@@ -73,7 +73,6 @@ public class FileOpenController {
                 loader.setController(new ApplicationController(dataFrame));
                 loader.setResources(FxmlUtils.getResourceBundle());
                 Stage stage = (Stage) mainController.getBorderPane().getScene().getWindow();
-                stage.setResizable(true);
                 stage.setScene(new Scene(loader.load()));
 
             } catch (Exception e) {

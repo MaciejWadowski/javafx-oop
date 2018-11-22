@@ -3,32 +3,58 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="%menu.file">
-            <items>
-              <MenuItem mnemonicParsing="false" text="%menu.close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="%menu.edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="menu.delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="%menu.help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="%menu.about" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <HBox fx:id="hBox" prefHeight="60.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <top>
+      <VBox prefHeight="78.0" prefWidth="1190.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="%menu.file">
+                  <items>
+                    <MenuItem fx:id="closeItem" mnemonicParsing="false" text="%menu.close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="%menu.edit">
+                  <items>
+                    <MenuItem fx:id="caspian" mnemonicParsing="false" text="%menu.caspian" />
+                        <MenuItem fx:id="modena" mnemonicParsing="false" text="%menu.modena" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="menu.delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="%menu.help">
+                  <items>
+                    <MenuItem fx:id="about" mnemonicParsing="false" text="%menu.about" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <ToggleButton fx:id="mainTableToggleButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" selected="true" text="%menu.main">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="toggleGroup" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton fx:id="operationToggleButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" text="%menu.operations" toggleGroup="$toggleGroup" />
+                  <ToggleButton fx:id="chartToggleButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" text="%menu.chart" toggleGroup="$toggleGroup" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>
