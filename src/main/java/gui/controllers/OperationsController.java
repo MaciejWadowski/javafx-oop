@@ -32,6 +32,7 @@ public class OperationsController {
         comboBox.setItems(FXCollections.observableArrayList(List.of(dataFrame.getColumnNames())));
     }
 
+    @FXML
     public void max() {
         try {
             setTableView(dataFrame.groupBy(list.toArray(String[]::new)).max());
@@ -40,6 +41,7 @@ public class OperationsController {
         }
     }
 
+    @FXML
     public void min() {
         try {
             setTableView(dataFrame.groupBy(list.toArray(String[]::new)).min());
@@ -48,6 +50,7 @@ public class OperationsController {
         }
     }
 
+    @FXML
     public void sum() {
         try {
             setTableView(dataFrame.groupBy(list.toArray(String[]::new)).sum());
@@ -56,6 +59,7 @@ public class OperationsController {
         }
     }
 
+    @FXML
     public void mean() {
         try {
             setTableView(dataFrame.groupBy(list.toArray(String[]::new)).mean());
@@ -64,6 +68,7 @@ public class OperationsController {
         }
     }
 
+    @FXML
     public void var() {
         try {
             setTableView(dataFrame.groupBy(list.toArray(String[]::new)).var());
@@ -72,6 +77,7 @@ public class OperationsController {
         }
     }
 
+    @FXML
     public void std() {
         try {
             setTableView(dataFrame.groupBy(list.toArray(String[]::new)).std());
@@ -80,6 +86,7 @@ public class OperationsController {
         }
     }
 
+    @FXML
     public void add() {
         if(comboBox.getSelectionModel().getSelectedItem() != null) {
             list.add(comboBox.getSelectionModel().getSelectedItem());

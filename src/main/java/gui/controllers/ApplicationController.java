@@ -55,8 +55,6 @@ public class ApplicationController {
         this.dataFrame = dataFrame;
     }
 
-    public ApplicationController() {}
-
     public void initialize() {
        String[] names = dataFrame.getColumnNames();
        classes = dataFrame.getClasses();
