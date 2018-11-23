@@ -9,7 +9,7 @@
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainController">
    <center>
-      <VBox fx:id="vBox" prefHeight="200.0" prefWidth="100.0" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
+      <VBox fx:id="vBox" prefHeight="200.0" prefWidth="100.0" stylesheets="@../style/main-style.css" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="296.0" prefWidth="596.0" text="DataFrame" />
             <HBox alignment="CENTER" prefHeight="374.0" prefWidth="596.0" spacing="50.0">
@@ -19,7 +19,7 @@
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#createEmpty" prefHeight="100.0" prefWidth="220.0" stylesheets="@../style/style.css" text="Create Empty Data Frame" wrapText="true" />
+                  <Button mnemonicParsing="false" onAction="#createEmpty" prefHeight="100.0" prefWidth="220.0" stylesheets="@../style/main-style.css" text="Create Empty Data Frame" wrapText="true" />
                </children>
             </HBox>
          </children>

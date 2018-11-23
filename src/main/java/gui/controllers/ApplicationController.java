@@ -8,6 +8,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -109,6 +110,7 @@ public class ApplicationController {
         // Hbox
         hBox.setSpacing(10);
         hBox.setPadding(new Insets(10));
+        hBox.setAlignment(Pos.CENTER);
         hBox.getChildren().add(addRow(new Button("Add Row")));
 
         tableView.getColumns().addAll(list);
@@ -121,7 +123,7 @@ public class ApplicationController {
                 try {
                     value[i] = (Value) classes[i].getConstructor(String.class).newInstance(textFields.get(i).getText());
                     textFields.get(i).clear();
-                } catch( Exception exception) {
+                } catch(Exception exception) {
                     DialogUtils.errorDialog(exception.toString());
                 }
             }
@@ -129,7 +131,7 @@ public class ApplicationController {
                 dataFrame.addRow(value);
                 tableView.getItems().add(new Integer(dataFrame.size() - 1));
             } catch (ValueOperationException e1) {
-                e1.printStackTrace();
+                DialogUtils.errorDialog(e.toString());
             }
         });
         return  button;

@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lab1.data.frame.DataFrame;
@@ -26,18 +27,24 @@ import java.util.List;
 
 public class FileOpenController {
 
+    private static final String APPLICATION_CONTROLLER_FXML = "/fxml/ApplicationController.fxml";
+
+    @FXML
+    private TextField textField;
     @FXML
     private ComboBox<Class<? extends Value>> comboBox;
     @FXML
     private TextArea textArea;
 
     private ArrayList<Class<? extends Value>> dataFrameClasses;
+    private ArrayList<String> dataFrameNames;
     private MainController mainController;
     private File file;
 
     @FXML
     public void initialize() {
         dataFrameClasses = new ArrayList<>();
+        dataFrameNames = new ArrayList<>();
         List<Class<? extends Value>> arrayList = new ArrayList<>();
         arrayList.add(StringValue.class);
         arrayList.add(IntegerValue.class);
@@ -50,6 +57,8 @@ public class FileOpenController {
         listProperty.set(classList);
 
         comboBox.itemsProperty().bindBidirectional(listProperty);
+        textField.setText("");
+        textField.setPromptText("Column name:");
     }
 
     @FXML
@@ -61,39 +70,49 @@ public class FileOpenController {
 
     @FXML
     public void next() {
-        Class[] classes = new Class[dataFrameClasses.size()];
-        for (int i = 0; i < dataFrameClasses.size(); i++) {
-            classes[i] = dataFrameClasses.get(i);
-        }
+        DataFrame dataFrame = null;
 
         if(file != null) {
             try {
-                DataFrame dataFrame = new DataFrame(file.getAbsolutePath(), classes);
-                FXMLLoader loader = new FXMLLoader(FileOpenController.class.getResource("/fxml/ApplicationController.fxml"));
-                loader.setController(new ApplicationController(dataFrame));
-                loader.setResources(FxmlUtils.getResourceBundle());
-                Stage stage = (Stage) mainController.getBorderPane().getScene().getWindow();
-                stage.setScene(new Scene(loader.load()));
-
+                dataFrame = new DataFrame(file.getAbsolutePath(), dataFrameClasses.toArray(Class[]::new));
             } catch (Exception e) {
                 DialogUtils.errorDialog(e.toString());
             }
         } else {
-            //code for empty DataFrame
+            dataFrame = new DataFrame(dataFrameNames.toArray(String[]::new), dataFrameClasses.toArray(Class[]::new));
+        }
+        FXMLLoader loader = new FXMLLoader(FileOpenController.class.getResource(APPLICATION_CONTROLLER_FXML));
+        loader.setController(new ApplicationController(dataFrame));
+        loader.setResources(FxmlUtils.getResourceBundle());
+        Stage stage = (Stage) mainController.getBorderPane().getScene().getWindow();
+        try {
+            stage.setScene(new Scene(loader.load()));
+        } catch (IOException e) {
+            DialogUtils.errorDialog(e.toString());
         }
     }
 
     @FXML
     public void add() {
-        if(comboBox.getSelectionModel().getSelectedItem() != null) {
+        if(comboBox.getSelectionModel().getSelectedItem() != null && file != null) {
             dataFrameClasses.add(comboBox.getSelectionModel().getSelectedItem());
             textArea.setText(dataFrameClasses.toString());
+        } else if (comboBox.getSelectionModel().getSelectedItem() != null && !textField.getText().equals("")) {
+            dataFrameClasses.add(comboBox.getSelectionModel().getSelectedItem());
+            dataFrameNames.add(textField.getText());
+            textField.setText("");
+            textArea.setText(dataFrameClasses.toString() + '\n' + dataFrameNames.toString());
         }
     }
 
     @FXML
     public void remove() {
-        dataFrameClasses.remove(comboBox.getSelectionModel().getSelectedItem());
+        if(file == null && dataFrameNames.contains(textField.getText())) {
+            dataFrameClasses.remove(comboBox.getSelectionModel().getSelectedItem());
+            dataFrameNames.remove(textField.getText());
+        } else {
+            dataFrameClasses.remove(comboBox.getSelectionModel().getSelectedItem());
+        }
         textArea.setText(dataFrameClasses.toString());
     }
 
@@ -103,6 +122,7 @@ public class FileOpenController {
 
     public void setFile(File file) {
         this.file = file;
+        textField.setEditable(false);
     }
 
     private Class[] classGuess(File file) {

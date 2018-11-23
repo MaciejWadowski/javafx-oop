@@ -1,6 +1,7 @@
 package gui.controllers;
 
 import gui.dialogs.DialogUtils;
+import gui.dialogs.FxmlUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
@@ -25,12 +26,11 @@ public class MainController {
     @FXML
     public void initialize() {
         try {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/FileOpenController.fxml"));
+            FXMLLoader loader = FxmlUtils.load("/fxml/FileOpenController.fxml");
+            loader.setResources(FxmlUtils.getResourceBundle());
             pane = loader.load();
             fileOpenController = loader.getController();
             fileOpenController.setMainController(this);
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles.messages");
-            loader.setResources(resourceBundle);
         } catch (Exception e) {
             DialogUtils.errorDialog(e.toString() + e.getMessage());
         }

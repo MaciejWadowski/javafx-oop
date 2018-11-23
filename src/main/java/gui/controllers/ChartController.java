@@ -1,7 +1,6 @@
 package gui.controllers;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -10,7 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import lab1.data.frame.Column;
 import lab1.data.frame.DataFrame;
-import lab3.Value;
+
 
 public class ChartController {
 

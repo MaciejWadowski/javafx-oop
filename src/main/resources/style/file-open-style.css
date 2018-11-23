@@ -1,0 +1,48 @@
+AnchorPane {
+    -fx-background-color: darkorange;
+    -fx-border-width: 2px;
+    -fx-border-color: #555;
+}
+
+Button {
+    -fx-font-family: Arial, Helvetica, sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: darkorange;
+    -fx-border-width: 1px;
+    -fx-border-color: #555;
+    -fx-text-fill: #555;
+    -fx-wrap-text: true;
+}
+
+Button:hover {
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
+
+Label {
+    -fx-text-fill: #555;
+}
+
+ComboBox {
+    -fx-background-color: #555;
+}
+
+ComboBox .list-cell {
+    -fx-background-color: #555;
+    -fx-text-fill: lightgrey;
+}
+
+TextField {
+    -fx-background-color: #555;
+    -fx-text-fill: lightgrey;
+}
+
+TextArea {
+    -fx-background-color: #555;
+    -fx-text-fill: lightgrey;
+}
+
+TextArea .content {
+    -fx-background-color: #555;
+    -fx-text-fill: grey;
+}
