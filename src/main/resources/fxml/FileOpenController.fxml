@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../style/file-open-style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.FileOpenController">
    <children>
       <Button layoutX="44.0" layoutY="333.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="79.0" text="%file.back" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="42.0" />
-      <Button layoutX="503.0" layoutY="333.0" mnemonicParsing="false" onAction="#next" prefHeight="40.0" prefWidth="79.0" text="%file.next" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="42.0" />
+      <Button fx:id="nextButton" layoutX="503.0" layoutY="333.0" mnemonicParsing="false" onAction="#next" prefHeight="40.0" prefWidth="79.0" text="%file.next" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="42.0" />
       <Button layoutX="345.0" layoutY="34.0" mnemonicParsing="false" onAction="#add" prefHeight="38.0" prefWidth="79.0" text="%file.add" AnchorPane.rightAnchor="152.0" AnchorPane.topAnchor="32.0" />
       <ComboBox fx:id="comboBox" prefHeight="38.0" prefWidth="251.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0" />
       <Button layoutX="480.0" layoutY="34.0" mnemonicParsing="false" onAction="#remove" prefHeight="38.0" prefWidth="79.0" text="%file.remove" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="32.0" />

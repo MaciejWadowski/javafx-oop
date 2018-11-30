@@ -17,6 +17,7 @@ public class Main extends Application {
         Parent root = FxmlUtils.fxmlLoader(MAIN_CONTROLLER_FXML);
         stage.setScene(new Scene(root));
         stage.setTitle("DataFrame");
+        stage.setResizable(false);
         stage.show();
     }
 

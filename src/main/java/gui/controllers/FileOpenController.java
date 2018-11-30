@@ -4,15 +4,16 @@ import gui.dialogs.DialogUtils;
 import gui.dialogs.FxmlUtils;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lab1.data.frame.DataFrame;
 import lab3.*;
@@ -22,13 +23,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FileOpenController {
 
     private static final String APPLICATION_CONTROLLER_FXML = "/fxml/ApplicationController.fxml";
 
+    @FXML
+    private Button nextButton;
     @FXML
     private TextField textField;
     @FXML
@@ -40,6 +42,7 @@ public class FileOpenController {
     private ArrayList<String> dataFrameNames;
     private MainController mainController;
     private File file;
+    private DataFrame dataFrame;
 
     @FXML
     public void initialize() {
@@ -70,9 +73,8 @@ public class FileOpenController {
 
     @FXML
     public void next() {
-        DataFrame dataFrame = null;
 
-        if(file != null) {
+        if (file != null) {
             try {
                 dataFrame = new DataFrame(file.getAbsolutePath(), dataFrameClasses.toArray(Class[]::new));
             } catch (Exception e) {
@@ -81,20 +83,25 @@ public class FileOpenController {
         } else {
             dataFrame = new DataFrame(dataFrameNames.toArray(String[]::new), dataFrameClasses.toArray(Class[]::new));
         }
-        FXMLLoader loader = new FXMLLoader(FileOpenController.class.getResource(APPLICATION_CONTROLLER_FXML));
-        loader.setController(new ApplicationController(dataFrame));
-        loader.setResources(FxmlUtils.getResourceBundle());
-        Stage stage = (Stage) mainController.getBorderPane().getScene().getWindow();
-        try {
-            stage.setScene(new Scene(loader.load()));
-        } catch (IOException e) {
-            DialogUtils.errorDialog(e.toString());
+
+        if (dataFrame != null) {
+            FXMLLoader loader = new FXMLLoader(FileOpenController.class.getResource(APPLICATION_CONTROLLER_FXML));
+            loader.setController(new ApplicationController(dataFrame));
+            loader.setResources(FxmlUtils.getResourceBundle());
+            Stage stage = (Stage) mainController.getBorderPane().getScene().getWindow();
+            stage.setResizable(true);
+            try {
+                stage.setScene(new Scene(loader.load()));
+            } catch (IOException e) {
+                DialogUtils.errorDialog(e.toString());
+            }
         }
     }
 
+
     @FXML
     public void add() {
-        if(comboBox.getSelectionModel().getSelectedItem() != null && file != null) {
+        if (comboBox.getSelectionModel().getSelectedItem() != null && file != null) {
             dataFrameClasses.add(comboBox.getSelectionModel().getSelectedItem());
             textArea.setText(dataFrameClasses.toString());
         } else if (comboBox.getSelectionModel().getSelectedItem() != null && !textField.getText().equals("")) {
@@ -107,7 +114,7 @@ public class FileOpenController {
 
     @FXML
     public void remove() {
-        if(file == null && dataFrameNames.contains(textField.getText())) {
+        if (file == null && dataFrameNames.contains(textField.getText())) {
             dataFrameClasses.remove(comboBox.getSelectionModel().getSelectedItem());
             dataFrameNames.remove(textField.getText());
         } else {
@@ -131,7 +138,7 @@ public class FileOpenController {
             bufferedReader.readLine();
             String[] string = bufferedReader.readLine().split(",");
             for (int i = 0; i < string.length; i++) {
-                if(string[i].matches("^([+-]?\\d+)$")) {
+                if (string[i].matches("^([+-]?\\d+)$")) {
                     classList.add(IntegerValue.class);
                 } else if (string[i].matches("^([+-]?\\d*\\.?\\d*)$")) {
                     classList.add(DoubleValue.class);

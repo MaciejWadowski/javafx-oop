@@ -4,15 +4,22 @@ import gui.dialogs.DialogUtils;
 import gui.dialogs.FxmlUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import lab1.data.frame.Column;
@@ -20,7 +27,6 @@ import lab1.data.frame.DataFrame;
 import lab3.Value;
 import lab5.ValueOperationException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +36,7 @@ public class ApplicationController {
 
     private static final String OPERATIONS_CONTROLLER_FXML = "/fxml/OperationsController.fxml";
     private static final String CHART_CONTROLLER_FXML = "/fxml/ChartController.fxml";
+
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -47,10 +54,11 @@ public class ApplicationController {
     @FXML
     private ToggleButton chartToggleButton;
 
-
+    private Integer visibleRows;
     private DataFrame dataFrame;
     private Class[] classes;
     private List<TextField> textFields;
+    private ObservableList<Integer> observableList;
 
     public ApplicationController(DataFrame dataFrame) {
         this.dataFrame = dataFrame;
@@ -60,6 +68,7 @@ public class ApplicationController {
        String[] names = dataFrame.getColumnNames();
        classes = dataFrame.getClasses();
        tableView.setEditable(true);
+       visibleRows = 100;
        List<TableColumn<Integer, Value>> list = new ArrayList<>(names.length);
        List<Column> columns = new ArrayList<>(names.length);
         for (int i = 0; i < dataFrame.size(); i++) {
@@ -129,7 +138,7 @@ public class ApplicationController {
             }
             try {
                 dataFrame.addRow(value);
-                tableView.getItems().add(new Integer(dataFrame.size() - 1));
+                tableView.getItems().add(dataFrame.size() - 1);
             } catch (ValueOperationException e1) {
                 DialogUtils.errorDialog(e.toString());
             }

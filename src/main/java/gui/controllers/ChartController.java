@@ -41,7 +41,6 @@ public class ChartController {
             lineChart.setTitle("Char of " + firstColumn.getName() + " and " + secondColumn.getName());
             XYChart.Series series = new XYChart.Series();
             series.setName("DataFrame");
-
             for (int i = 0; i < firstColumn.size(); i++) {
                 series.getData().add(new XYChart.Data<>(firstColumn.getElement(i).toString(), secondColumn.getElement(i).toString()));
             }
