@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.*;
 import java.util.ResourceBundle;
 
@@ -44,7 +45,7 @@ public class MainController {
         Stage stage = (Stage) borderPane.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);
 
-        if(file != null) {
+        if (file != null) {
             fileOpenController.setFile(file);
             borderPane.setCenter(pane);
         }

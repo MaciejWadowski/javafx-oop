@@ -1,16 +1,15 @@
 package gui.controllers;
 
+import exceptions.ValueOperationException;
 import gui.dialogs.DialogUtils;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import lab1.data.frame.Column;
 import lab1.data.frame.DataFrame;
-import lab3.Value;
-import lab5.ValueOperationException;
+import values.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +87,7 @@ public class OperationsController {
 
     @FXML
     public void add() {
-        if(comboBox.getSelectionModel().getSelectedItem() != null) {
+        if (comboBox.getSelectionModel().getSelectedItem() != null) {
             list.add(comboBox.getSelectionModel().getSelectedItem());
             label.setText(label.getText() + " " + comboBox.getSelectionModel().getSelectedItem());
         }
@@ -96,7 +95,7 @@ public class OperationsController {
 
     public void setTableView(DataFrame dataFrame) {
         String[] names = dataFrame.getColumnNames();
-        TableView<Integer>  tableView = new TableView<>();
+        TableView<Integer> tableView = new TableView<>();
         tableView.setEditable(true);
         List<TableColumn<Integer, Value>> list = new ArrayList<>(names.length);
         List<Column> columns = new ArrayList<>(names.length);
@@ -114,10 +113,10 @@ public class OperationsController {
 
         tableView.getColumns().add(intColumn);
 
-        for (String name: names) {
+        for (String name : names) {
             TableColumn<Integer, Value> tableColumn = new TableColumn<>(name);
             tableColumn.setMinWidth(300);
-            tableColumn.setCellValueFactory(cellData ->{
+            tableColumn.setCellValueFactory(cellData -> {
                 Integer value = cellData.getValue();
                 return new ReadOnlyObjectWrapper<>(dataFrame.getColumn(name).getElement(value));
             });

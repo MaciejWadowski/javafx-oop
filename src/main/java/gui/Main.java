@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import gui.dialogs.FxmlUtils;
+
 import java.util.Locale;
 
 public class Main extends Application {

@@ -29,7 +29,7 @@ public class ChartController {
 
     @FXML
     public void createChart() {
-        if(xColumn.getSelectionModel().getSelectedItem() != null && yColumn.getSelectionModel().getSelectedItem() != null) {
+        if (xColumn.getSelectionModel().getSelectedItem() != null && yColumn.getSelectionModel().getSelectedItem() != null) {
             Column firstColumn = dataFrame.getColumn(xColumn.getSelectionModel().getSelectedItem());
             Column secondColumn = dataFrame.getColumn(xColumn.getSelectionModel().getSelectedItem());
 

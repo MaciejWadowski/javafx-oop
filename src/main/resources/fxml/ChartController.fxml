@@ -6,21 +6,23 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.ChartController">
-   <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="70.0" BorderPane.alignment="CENTER">
-         <children>
-            <ComboBox prefWidth="150.0" fx:id="xColumn">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ComboBox>
-            <ComboBox fx:id="yColumn" prefWidth="150.0" />
-            <Button mnemonicParsing="false" onAction="#createChart" text="Create chart" />
-         </children>
-      </HBox>
-   </top>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/10.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.ChartController">
+    <top>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="70.0" BorderPane.alignment="CENTER">
+            <children>
+                <ComboBox prefWidth="150.0" fx:id="xColumn">
+                    <HBox.margin>
+                        <Insets/>
+                    </HBox.margin>
+                </ComboBox>
+                <ComboBox fx:id="yColumn" prefWidth="150.0"/>
+                <Button mnemonicParsing="false" onAction="#createChart" text="Create chart"/>
+            </children>
+        </HBox>
+    </top>
     <userData>
-        <fx:reference source="controller" />
+        <fx:reference source="controller"/>
     </userData>
 </BorderPane>

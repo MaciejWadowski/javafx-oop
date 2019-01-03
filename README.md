@@ -7,7 +7,7 @@ To compile program you need:
     -Dfile=path-to-file \
     -DgroupId=agh \
     -DartifactId=data-frame \
-    -Dversion=1.1 \
+    -Dversion=2.0 \
     -Dpackaging=jar \
     -DgeneratePom=true 
  - go to maven projects -> plugins  -> exec  -> exec:java  -> create... -> field 'Comman Line' should be 'compile exec:java -f pom.xml' -> apply  -> run that configuration

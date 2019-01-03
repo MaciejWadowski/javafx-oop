@@ -4,7 +4,6 @@ import gui.dialogs.DialogUtils;
 import gui.dialogs.FxmlUtils;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lab1.data.frame.DataFrame;
-import lab3.*;
+import values.*;
 
 import java.io.BufferedReader;
 import java.io.File;

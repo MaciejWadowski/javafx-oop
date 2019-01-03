@@ -1,31 +1,23 @@
 package gui.controllers;
 
+import exceptions.ValueOperationException;
 import gui.dialogs.DialogUtils;
 import gui.dialogs.FxmlUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import lab1.data.frame.Column;
 import lab1.data.frame.DataFrame;
-import lab3.Value;
-import lab5.ValueOperationException;
+import values.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,12 +57,12 @@ public class ApplicationController {
     }
 
     public void initialize() {
-       String[] names = dataFrame.getColumnNames();
-       classes = dataFrame.getClasses();
-       tableView.setEditable(true);
-       visibleRows = 100;
-       List<TableColumn<Integer, Value>> list = new ArrayList<>(names.length);
-       List<Column> columns = new ArrayList<>(names.length);
+        String[] names = dataFrame.getColumnNames();
+        classes = dataFrame.getClasses();
+        tableView.setEditable(true);
+        visibleRows = 100;
+        List<TableColumn<Integer, Value>> list = new ArrayList<>(names.length);
+        List<Column> columns = new ArrayList<>(names.length);
         for (int i = 0; i < dataFrame.size(); i++) {
             tableView.getItems().add(i);
         }
@@ -86,10 +78,10 @@ public class ApplicationController {
         textFields = new ArrayList<>();
         tableView.getColumns().add(intColumn);
 
-        for (String name: names) {
+        for (String name : names) {
             TableColumn<Integer, Value> tableColumn = new TableColumn<>(name);
             tableColumn.setMinWidth(300);
-            tableColumn.setCellValueFactory(cellData ->{
+            tableColumn.setCellValueFactory(cellData -> {
                 Integer value = cellData.getValue();
                 return new ReadOnlyObjectWrapper<>(dataFrame.getColumn(name).getElement(value));
             });
@@ -132,7 +124,7 @@ public class ApplicationController {
                 try {
                     value[i] = (Value) classes[i].getConstructor(String.class).newInstance(textFields.get(i).getText());
                     textFields.get(i).clear();
-                } catch(Exception exception) {
+                } catch (Exception exception) {
                     DialogUtils.errorDialog(exception.toString());
                 }
             }
@@ -143,13 +135,13 @@ public class ApplicationController {
                 DialogUtils.errorDialog(e.toString());
             }
         });
-        return  button;
+        return button;
     }
 
     public void close(MenuItem menuItem) {
         menuItem.setOnAction(e -> {
             Optional<ButtonType> result = DialogUtils.confirmationDialog();
-            if(result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK) {
                 Platform.exit();
                 System.exit(0);
             }
