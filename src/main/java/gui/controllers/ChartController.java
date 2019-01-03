@@ -31,7 +31,7 @@ public class ChartController {
     public void createChart() {
         if (xColumn.getSelectionModel().getSelectedItem() != null && yColumn.getSelectionModel().getSelectedItem() != null) {
             Column firstColumn = dataFrame.getColumn(xColumn.getSelectionModel().getSelectedItem());
-            Column secondColumn = dataFrame.getColumn(xColumn.getSelectionModel().getSelectedItem());
+            Column secondColumn = dataFrame.getColumn(yColumn.getSelectionModel().getSelectedItem());
 
             final CategoryAxis xAxis = new CategoryAxis();
             final CategoryAxis yAxis = new CategoryAxis();

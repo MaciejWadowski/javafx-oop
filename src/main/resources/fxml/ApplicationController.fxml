@@ -57,8 +57,6 @@
                                       prefWidth="180.0" text="%menu.operations" toggleGroup="$toggleGroup"/>
                         <ToggleButton fx:id="chartToggleButton" mnemonicParsing="false" prefHeight="50.0"
                                       prefWidth="180.0" text="%menu.chart" toggleGroup="$toggleGroup"/>
-                        <ToggleButton fx:id="testToggleButton" mnemonicParsing="false" prefHeight="50.0"
-                                      prefWidth="180.0" text="%menu.chart" toggleGroup="$toggleGroup"/>
                     </children>
                 </HBox>
             </children>

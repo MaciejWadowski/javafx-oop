@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <data.frame.version>2.0</data.frame.version>
+        <data.frame.version>2.1</data.frame.version>
         <junit.version>RELEASE</junit.version>
         <annotations.version>16.0.2</annotations.version>
         <java.version>11</java.version>
